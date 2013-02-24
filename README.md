@@ -1,0 +1,4 @@
+jscn
+====
+
+JavaScript Configuration Notation
