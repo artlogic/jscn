@@ -10,7 +10,7 @@ Goals/Requirements
 * Comments!
 * Multi-line strings.
 * The dialect should be forgiving enough to parse any JSON document with an object as a root element.
-* Ability to deal with more data types later on.
+* Ability to deal with more data types at a later date.
 
 Changes from JSON
 -----------------
@@ -20,7 +20,7 @@ Changes from JSON
 * Strings can be specified with ruby style [heredoc](http://en.wikipedia.org/wiki/Here_document#Ruby) syntax: ```<<DELIM```
 * Comments can either appear on a line by themselves, or at the end of a line.  They are denoted by a hash symbol.
 * Quoting of keys in objects is optional, except in cases where the key name might cause parsing ambiguity.
-* Object headers - forthcoming.
+* Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
 
 Example
 -------
@@ -30,7 +30,7 @@ Forthcoming.
 Why?
 ----
 
-I really like JSON, but it doesn't have comments or multiline/raw strings (and can be error-prone to write).  On top of that, it's not much fun to read.
+I really like JSON, but it doesn't have comments or multiline/raw strings (and can be error-prone to write).  It could be nicer to read.
 
 Data Type Extensions
 --------------------
