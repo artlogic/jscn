@@ -25,7 +25,39 @@ Changes from JSON
 Example
 -------
 
-Forthcoming.
+```
+# This is a comment
+
+key: "value"  # value on the root object
+
+list1: [1 true "string"]
+list2: [
+  "item1"  # comments can be anywhere whitespace is valid
+  "item2"
+]
+
+object1: {
+  key1: "value1"
+  key2: "value2"
+}
+
+template: <<END
+This is a heredoc string.  It can contain
+ * newlines
+ * quotes "
+ * backslashes \
+ * whatever...
+END
+
+# Let's change the scope
+[settings]
+key: "value"  # settings.key
+
+# How about a deeply nested scope?
+[settings][user][colors]
+text: "white"  # settings.user.colors.text
+highlight: "blue"
+```
 
 Why?
 ----
