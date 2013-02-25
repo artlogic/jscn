@@ -30,13 +30,14 @@ Example
 
 key: "value"  # value on the root object
 
-list1: [1 true "string"]
+list1: [1, true, "string"]  # commas are optional
 list2: [
   "item1"  # comments can be anywhere whitespace is valid
   "item2"
 ]
 
-object1: {
+object1: {key1: "value1", key2: "value2"}  # commas are optional
+object2: {
   key1: "value1"
   key2: "value2"
 }
