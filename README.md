@@ -30,17 +30,24 @@ Example
 
 key: "value"  # value on the root object
 
+# Let's change the scope
+[settings]
+key: "value"  # settings.key
+
+# the settings scope is in effect until another scope change
+
+# How about a deeply nested scope?
+[settings][user][colors]
+text: "white"  # settings.user.colors.text
+highlight: "blue"
+
+# scope changes exist on a line by themselves
+[example]
 list1: [1, true, "string"]  # commas are optional
 list2: [
   "item1"  # comments can be anywhere whitespace is valid
   "item2"
 ]
-
-object1: {key1: "value1", key2: "value2"}  # commas are optional
-object2: {
-  key1: "value1"
-  key2: "value2"
-}
 
 template: <<END
 This is a heredoc string.  It can contain
@@ -50,15 +57,33 @@ This is a heredoc string.  It can contain
  * whatever...
 END
 
-# Let's change the scope
-[settings]
-key: "value"  # settings.key
+# leading whitespace is inconsequential
+    key: "value"
 
-# How about a deeply nested scope?
-[settings][user][colors]
-text: "white"  # settings.user.colors.text
-highlight: "blue"
+# keys can be quoted, optionally
+"another key": "value"
+
+# but don't generally need to be (unless they contain a square bracket or a colon)
+$a crazy key!: "value"
+
+# scopes can also be quoted (and empty!)
+["new scope"]
+
+# but don't generally need to be (unless they contain a square bracket)
+[$crazy scope!]
+
+# It's unlikely you would use this syntax, but for completeness
+object1: {key1: "value1", key2: "value2"}  # commas are optional
+object2: {
+  key1: "value1"
+  key2: "value2"
+}
 ```
+
+Compiled JSON
+-------------
+
+Forthcoming.
 
 Why?
 ----
