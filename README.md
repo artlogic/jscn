@@ -15,8 +15,44 @@ Goals/Requirements
 Changes from JSON
 -----------------
 
-* The only valid root value in a JSCN document is an object.  The braces on the root object are optional.
-* Commas are optional in arrays and objects (and are ignored as whitespace).
+JSCN is almost JSON with some minor changes/extensions.
+
+### The top-level value must be an object.  Its braces are optional.
+
+The top-level element in a JSON document is one of the following:
+
+* string
+* number
+* object
+* array
+* true
+* false
+* null
+
+For configuration files, only object is really useful, so, in JSCN, only object is allowed.  Furthermore, the braces are optional on the top-level object.  In JSON, you would write this:
+
+```json
+{
+  "property": null
+}
+```
+
+JSCN allows you to drop the braces for the top-level object only:
+
+```
+"property": null
+```
+
+### Commas are optional in arrays and objects.
+
+In JSON, commas are needed to entries in arrays and objects.  In JSCN, they are optional:
+
+```
+["string" 42 true false null]
+
+{"property1": true "property2": 10}
+```
+
 * Strings can be specified with ruby style [heredoc](http://en.wikipedia.org/wiki/Here_document#Ruby) syntax: ```<<DELIM```
 * Comments can either appear on a line by themselves, or at the end of a line.  They are denoted by a hash symbol.
 * Quoting of keys in objects is optional, except in cases where the key name might cause parsing ambiguity.
