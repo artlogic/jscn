@@ -1,7 +1,7 @@
 JSCN
 ====
 
-JSCN (JavaScript Configuration Notation) is a human readable dialect of JSON designed with config files in mind.  Inspired by [TOML](https://github.com/mojombo/toml).  JSCN are meant to be compiled into JSON that can be parsed by any standard parser.
+JSCN (JavaScript Configuration Notation) is a human readable dialect of JSON designed with config files in mind, inspired by [TOML](https://github.com/mojombo/toml).  JSCN documents are meant to be compiled into JSON that can be parsed by any standard parser.
 
 Goals/Requirements
 ------------------
