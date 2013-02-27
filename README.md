@@ -45,7 +45,7 @@ JSCN allows you to drop the braces for the top-level object only:
 
 ### Commas are optional in arrays and objects.
 
-In JSON, commas are needed to entries in arrays and objects.  In JSCN, they are optional:
+In JSON, commas are needed to separate entries in arrays and objects.  In JSCN, they are optional:
 
 ```
 ["string" 42 true false null]
