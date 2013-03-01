@@ -1,7 +1,7 @@
-JSCN
-====
+JSCN v0.1
+=========
 
-JSCN (JavaScript Configuration Notation) is a human readable dialect of [JSON](http://json.org/) designed with config files in mind, inspired by [TOML](https://github.com/mojombo/toml).
+JSCN (JavaScript Configuration Notation) is a human readable dialect of [JSON](http://json.org/) designed with config files in mind, inspired by [TOML](https://github.com/mojombo/toml).  This specification is still in development and subject to change.
 
 Goals/Requirements
 ------------------
@@ -10,12 +10,11 @@ Goals/Requirements
 * Comments!
 * Multi-line strings.
 * The dialect should be forgiving enough to parse any JSON document with an object as a root element.
-* Ability to deal with more data types at a later date.
 
 Changes from JSON
 -----------------
 
-JSCN is almost JSON with some minor changes/extensions.  A simple JSON document will be transformed into JSCN to illustrate:
+JSCN is almost JSON with some minor changes/extensions.  When in doubt, refer to the [JSON RFC](http://www.ietf.org/rfc/rfc4627.txt) for clarification.  A simple JSON document will be transformed into JSCN to illustrate:
 
 ```json
 {
@@ -38,7 +37,7 @@ JSCN is almost JSON with some minor changes/extensions.  A simple JSON document 
 
 ### Commas are optional in arrays and objects.
 
-Commas are considered whitespace by JSCN.  Tokens in objects and arrays are separated by whitespace as opposed to commas.
+Commas are considered whitespace by JSCN.  Tokens in objects and arrays are separated by one or more whitespace characters as opposed to commas.
 
 ```
 {
@@ -84,7 +83,7 @@ In cases where ambiguity would occur (e.g. keys containing colons), keys should 
 
 ### Standard single-line hash comments are allowed.
 
-Comments denoted by the hash symbol, can either appear on a line by itself, or at the end of any line.  Either a line feed or carriage return (as defined by the [JSON RFC](http://www.ietf.org/rfc/rfc4627.txt)) ends the comment.
+Comments denoted by the hash symbol, can either appear on a line by itself, or at the end of a line.  Either a line feed or carriage return (as defined by the [JSON RFC](http://www.ietf.org/rfc/rfc4627.txt)) ends the comment.
 
 ```
 {
@@ -136,7 +135,7 @@ END
 
 ### The top-level value must be an object.  Its braces are optional.
 
-The top-level element in a JSON document is either a string or an array, according to the RFC.  For most configuration files, only object is useful, so, in JSCN, only object is allowed.  Furthermore, the braces are optional on the top-level object.
+The top-level element in a JSON document is either an object or an array.  For most configuration files, only an object is useful, so, in JSCN, only object is allowed.  Furthermore, the braces are optional on the top-level object.
 
 ```
 # this is a comment
@@ -160,7 +159,7 @@ object: {
 }
 ```
 
-### Figure out this header... 
+### Top-level scope can be changed (permanently) via a directive.
 
 RE-WRITE: Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
 
@@ -243,7 +242,12 @@ object2: {
 }
 ```
 
+Parsing
+-------
+
+A parser has not yet been written.  I hope to change that in the near future.  Furthermore, I have not yet decided if I will compile JSCN into JSON, or parse it directly.
+
 Data Type Extensions
 --------------------
 
-At some point in the future, more data types may be added.  I imagine these will be represented in JSON with MongoDB's [Extended JSON](http://docs.mongodb.org/manual/reference/mongodb-extended-json/).  In a JSCN file, they will have a much simpler representation.
+In the future, more data types may be added.  I imagine these will be represented in (intermediate) JSON with MongoDB's [Extended JSON](http://docs.mongodb.org/manual/reference/mongodb-extended-json/).  In a JSCN file, they will have a much simpler representation.
