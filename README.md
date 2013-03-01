@@ -1,7 +1,7 @@
 JSCN
 ====
 
-JSCN (JavaScript Configuration Notation) is a human readable dialect of JSON designed with config files in mind, inspired by [TOML](https://github.com/mojombo/toml).  JSCN documents are meant to be compiled into JSON that can be parsed by any standard parser.
+JSCN (JavaScript Configuration Notation) is a human readable dialect of [JSON](http://json.org/) designed with config files in mind, inspired by [TOML](https://github.com/mojombo/toml).
 
 Goals/Requirements
 ------------------
@@ -15,48 +15,152 @@ Goals/Requirements
 Changes from JSON
 -----------------
 
-JSCN is almost JSON with some minor changes/extensions.
-
-### The top-level value must be an object.  Its braces are optional.
-
-The top-level element in a JSON document is one of the following:
-
-* string
-* number
-* object
-* array
-* true
-* false
-* null
-
-For configuration files, only object is really useful, so, in JSCN, only object is allowed.  Furthermore, the braces are optional on the top-level object.  In JSON, you would write this:
+JSCN is almost JSON with some minor changes/extensions.  A simple JSON document will be transformed into JSCN to illustrate:
 
 ```json
 {
-  "property": null
+	"string": "this is a string",
+	
+	"object": {
+		"number": 10,
+		"boolean": true
+	},
+	
+	"array": [
+		"an array",
+		4,
+		"you"
+	],
+	
+	"multi": "contrived\nexample\nstring"
 }
-```
-
-JSCN allows you to drop the braces for the top-level object only:
-
-```
-"property": null
 ```
 
 ### Commas are optional in arrays and objects.
 
-In JSON, commas are needed to separate entries in arrays and objects.  In JSCN, they are optional:
+Commas are considered whitespace by JSCN.  Tokens in objects and arrays are separated by whitespace as opposed to commas.
 
 ```
-["string" 42 true false null]
-
-{"property1": true "property2": 10}
+{
+	"string": "this is a string"
+	
+	"object": {
+		"number": 10
+		"boolean": true
+	},
+	
+	"array": [
+		"an array"
+		4
+		"you"
+	]
+	
+	"multi": "contrived\nexample\nstring"
+}
 ```
 
-* Strings can be specified with ruby style [heredoc](http://en.wikipedia.org/wiki/Here_document#Ruby) syntax: ```<<DELIM```
-* Comments can either appear on a line by themselves, or at the end of a line.  They are denoted by a hash symbol.
-* Quoting of keys in objects is optional, except in cases where the key name might cause parsing ambiguity.
-* Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
+### Quoting of keys in objects is optional.
+
+In cases where ambiguity would occur (e.g. keys containing colons), keys should still be quoted.
+
+```
+{
+	string: "this is a string"
+	
+	object: {
+		number: 10
+		boolean: true
+	},
+	
+	array: [
+		"an array"
+		4
+		"you"
+	]
+	
+	multi: "contrived\nexample\nstring"
+}
+```
+
+### Standard single-line hash comments are allowed.
+
+Comments denoted by the hash symbol, can either appear on a line by itself, or at the end of any line.  Either a line feed or carriage return (as defined by the [JSON RFC](http://www.ietf.org/rfc/rfc4627.txt)) ends the comment.
+
+```
+{
+	# this is a comment
+	string: "this is a string"
+	
+	object: {
+		number: 10
+		boolean: true  # another comment
+	},
+	
+	array: [
+		"an array"
+		4
+		"you"
+	]
+	
+	multi: "contrived\nexample\nstring"
+}
+```
+
+### Strings can be specified with heredoc syntax.
+
+JSCN uses ruby style [heredoc](http://en.wikipedia.org/wiki/Here_document#Ruby) syntax: ```<<DELIM```.  The alternate ```<<-DELIM``` syntax is not supported.
+
+```
+{
+	# this is a comment
+	string: "this is a string"
+	
+	object: {
+		number: 10
+		boolean: true  # another comment
+	},
+	
+	array: [
+		"an array"
+		4
+		"you"
+	]
+	
+	multi: <<END
+contrived
+example
+string
+END
+}
+```
+
+### The top-level value must be an object.  Its braces are optional.
+
+The top-level element in a JSON document is either a string or an array, according to the RFC.  For most configuration files, only object is useful, so, in JSCN, only object is allowed.  Furthermore, the braces are optional on the top-level object.
+
+```
+# this is a comment
+string: "this is a string"
+
+object: {
+	number: 10
+	boolean: true  # another comment
+},
+
+array: [
+	"an array"
+	4
+	"you"
+]
+
+multi: <<END
+contrived
+example
+string
+END
+```
+
+### Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
 
 Example
 -------
@@ -115,16 +219,6 @@ object2: {
   key2: "value2"
 }
 ```
-
-Compiled JSON
--------------
-
-Forthcoming.
-
-Why?
-----
-
-I really like JSON, but it doesn't have comments or multiline/raw strings (and can be error-prone to write).  It could be nicer to read.
 
 Data Type Extensions
 --------------------
