@@ -19,20 +19,20 @@ JSCN is almost JSON with some minor changes/extensions.  A simple JSON document 
 
 ```json
 {
-	"string": "this is a string",
-	
-	"object": {
-		"number": 10,
-		"boolean": true
-	},
-	
-	"array": [
-		"an array",
-		4,
-		"you"
-	],
-	
-	"multi": "contrived\nexample\nstring"
+    "string": "this is a string",
+
+    "array": [
+        "an array",
+        4,
+        "you"
+    ],
+
+    "multi": "contrived\nexample\nstring"
+
+    "object": {
+        "number": 10,
+        "boolean": true
+    },
 }
 ```
 
@@ -42,20 +42,20 @@ Commas are considered whitespace by JSCN.  Tokens in objects and arrays are sepa
 
 ```
 {
-	"string": "this is a string"
-	
-	"object": {
-		"number": 10
-		"boolean": true
-	},
-	
-	"array": [
-		"an array"
-		4
-		"you"
-	]
-	
-	"multi": "contrived\nexample\nstring"
+    "string": "this is a string"
+
+    "array": [
+        "an array"
+        4
+        "you"
+    ]
+
+    "multi": "contrived\nexample\nstring"
+
+    "object": {
+        "number": 10
+        "boolean": true
+    }
 }
 ```
 
@@ -65,20 +65,20 @@ In cases where ambiguity would occur (e.g. keys containing colons), keys should 
 
 ```
 {
-	string: "this is a string"
-	
-	object: {
-		number: 10
-		boolean: true
-	},
-	
-	array: [
-		"an array"
-		4
-		"you"
-	]
-	
-	multi: "contrived\nexample\nstring"
+    string: "this is a string"
+
+    array: [
+        "an array"
+        4
+        "you"
+    ]
+
+    multi: "contrived\nexample\nstring"
+
+    object: {
+        number: 10
+        boolean: true
+    }
 }
 ```
 
@@ -88,21 +88,21 @@ Comments denoted by the hash symbol, can either appear on a line by itself, or a
 
 ```
 {
-	# this is a comment
-	string: "this is a string"
-	
-	object: {
-		number: 10
-		boolean: true  # another comment
-	},
-	
-	array: [
-		"an array"
-		4
-		"you"
-	]
-	
-	multi: "contrived\nexample\nstring"
+    # this is a comment
+    string: "this is a string"
+
+    array: [
+        "an array"
+        4
+        "you"
+    ]
+
+    multi: "contrived\nexample\nstring"
+
+    object: {
+        number: 10
+        boolean: true  # another comment
+    }
 }
 ```
 
@@ -112,25 +112,25 @@ JSCN uses ruby style [heredoc](http://en.wikipedia.org/wiki/Here_document#Ruby) 
 
 ```
 {
-	# this is a comment
-	string: "this is a string"
-	
-	object: {
-		number: 10
-		boolean: true  # another comment
-	},
-	
-	array: [
-		"an array"
-		4
-		"you"
-	]
-	
-	multi: <<END
+    # this is a comment
+    string: "this is a string"
+
+    array: [
+        "an array"
+        4
+        "you"
+    ]
+
+    multi: <<END
 contrived
 example
 string
 END
+
+    object: {
+        number: 10
+        boolean: true  # another comment
+    }
 }
 ```
 
@@ -142,15 +142,10 @@ The top-level element in a JSON document is either a string or an array, accordi
 # this is a comment
 string: "this is a string"
 
-object: {
-	number: 10
-	boolean: true  # another comment
-},
-
 array: [
-	"an array"
-	4
-	"you"
+    "an array"
+    4
+    "you"
 ]
 
 multi: <<END
@@ -158,6 +153,11 @@ contrived
 example
 string
 END
+
+object: {
+    number: 10
+    boolean: true  # another comment
+}
 ```
 
 ### Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
