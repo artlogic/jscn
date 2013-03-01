@@ -160,7 +160,30 @@ object: {
 }
 ```
 
-### Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
+### Figure out this header... 
+
+RE-WRITE: Top level keys can be assigned to an object other than the root object by specifying a scope change by wrapping the new scope in square brackets on a line by itself: ```[settings]```.  You can access deeper scopes in the same way you would index objects in JavaScript: ```[settings][user][colors]```.
+
+```
+# this is a comment
+string: "this is a string"
+
+array: [
+    "an array"
+    4
+    "you"
+]
+
+multi: <<END
+contrived
+example
+string
+END
+
+[object]
+number: 10
+boolean: true  # another comment
+```
 
 Example
 -------
