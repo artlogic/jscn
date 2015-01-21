@@ -26,12 +26,12 @@ JSCN is almost JSON with some minor changes/extensions.  When in doubt, refer to
         "you"
     ],
 
-    "multi": "contrived\nexample\nstring"
+    "multi": "contrived\nexample\nstring",
 
     "object": {
         "number": 10,
         "boolean": true
-    },
+    }
 }
 ```
 
